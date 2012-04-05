@@ -3,7 +3,7 @@ package CPAN::Testers::WWW::Reports::Query::AJAX;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
  
 #----------------------------------------------------------------------------
 
@@ -319,6 +319,6 @@ Initially released during the 2012 QA Hackathon in Paris.
   Copyright (C) 2011-2012 Barbie for Miss Barbell Productions.
 
   This module is free software; you can redistribute it and/or
-  modify it under the same terms as Perl itself.
+  modify it under the Artistic License 2.0.
 
 =cut
