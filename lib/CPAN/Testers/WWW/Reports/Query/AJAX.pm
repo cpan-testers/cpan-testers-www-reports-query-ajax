@@ -3,7 +3,7 @@ package CPAN::Testers::WWW::Reports::Query::AJAX;
 use strict;
 use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
  
 #----------------------------------------------------------------------------
 
@@ -94,7 +94,10 @@ $mech->agent_alias( 'Linux Mozilla' );
 
 sub new {
     my($class, %hash) = @_;
-    my $self = {};
+    my $self = {
+        success => 0,
+        error   => ''
+    };
     bless $self, $class;
     my @valid = qw(format);
     
@@ -115,16 +118,20 @@ sub new {
     #print "URL: $url\n";
 	eval { $mech->get( $url ); };
     if($@ || !$mech->success()) {
-        die $@;
-        return;
+        $self->{error} = $@;
+        return $self;
     }
 
     #print "URI: " . $mech->uri . "\n";
 
     $self->_parse( $mech->content() );
     
+    $self->{success} = 1;
     return $self;
 }
+
+sub is_success  { $_[0]->{success};         }
+sub error       { $_[0]->{error};           }
 
 sub all         { $_[0]->_basic('all');     }
 sub pass        { $_[0]->_basic('pass');    }
@@ -217,6 +224,20 @@ __END__
 Instatiates the object CPAN::WWW::Testers. Requires a hash of parameters, with
 'config' being the only mandatory key. Note that 'config' can be anything that
 L<Config::IniFiles> accepts for the I<-file> option.
+
+=back
+
+=head2 Status Methods
+
+=over 4
+
+=item * is_success
+
+Returns 1 if request succeeded, otherwise 0.
+
+=item * error
+
+Returns the error if the request was unsuccessful.
 
 =back
 

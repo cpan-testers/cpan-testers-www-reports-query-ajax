@@ -1,5 +1,8 @@
 Revision history for CPAN-Testers-WWW-Reports-Query-AJAX
 
+0.03    09/04/2012
+	- added better error handling.
+
 0.02    06/04/2012
 	- added META.json and test script.
 	- added ping test & skip if no network.
