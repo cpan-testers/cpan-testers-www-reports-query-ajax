@@ -1,15 +1,26 @@
-use 5.006; #due to 'warnings' pragma
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use 5.006;
+
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-    'NAME'          => 'CPAN::Testers::WWW::Reports::Query::AJAX',
-    'VERSION_FROM'  => 'lib/CPAN/Testers/WWW/Reports/Query/AJAX.pm',
-    'PREREQ_PM'     => {
-        WWW::Mechanize      => 0,
-    },
+    AUTHOR              => 'Barbie <barbie@cpan.org>',
+    NAME                => 'CPAN::Testers::WWW::Reports::Query::AJAX',
+    VERSION_FROM        => 'lib/CPAN/Testers/WWW/Reports/Query/AJAX.pm',
+    ABSTRACT            => 'Retrieve distribution stats direct from CPAN Testers website',
+    NO_META             => 1,
+    PREREQ_PM           => {
 
-    'NO_META'       => 1,
+        # prereqs
+        'WWW::Mechanize'    => 0,
 
-    'ABSTRACT'      => 'Retrieve distribution stats direct from CPAN Testers website.',
-    'AUTHOR'        => 'Barbie <barbie@cpan.org>'
+        # build/test prereqs
+        'Test::More'        => '0.70',
+        'IO::File'          => '0'
+
+    }
 );
+

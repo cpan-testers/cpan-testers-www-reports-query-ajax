@@ -1,28 +1,31 @@
 --- #YAML:1.0
 name:                CPAN::Testers::WWW::Reports::Query::AJAX
-version:             0.03
+version:             0.04
 abstract:            Retrieve distribution stats direct from CPAN Testers website.
 author:
   - Barbie <barbie@cpan.org>
 
-license:             perl
+license:             artistic_2
 distribution_type:   module
 installdirs:         site
 
 requires:
+  perl:                   5.006
   WWW::Mechanize:                   0
 recommends:
-  Test::More:                       0.70
-  Test::Pod:                        1.00
-  Test::Pod::Coverage:              0.08
-  Test::CPAN::Meta:                 0.12
+  Test::More:             0.70
+  Test::Pod:              1.00
+  Test::Pod::Coverage:    0.08
+  Test::CPAN::Meta:       0
+  Test::CPAN::Meta::JSON: 0
 build_requires:
-  Test::More:                       0.01
+  Test::More:             0.70
+  IO::File:               0
 
 provides:
   CPAN::Testers::WWW::Reports::Query::AJAX:
     file:     lib/CPAN/Testers/WWW/Reports/Query/AJAX.pm
-    version:  0.03
+    version:  0.04
 
 resources:
   repository: http://github.com/barbie/cpan-testers-www-reports-query-ajax
