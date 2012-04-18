@@ -1,6 +1,6 @@
 Revision history for CPAN-Testers-WWW-Reports-Query-AJAX
 
-0.04	current
+0.04	18/04/2012
 	- spelling fix. (thanks to Florian Schlichting & Gregor Herrmann).
 	- added minimum perl version (5.006).
 	- reworked Makefile.PL for clarity.
