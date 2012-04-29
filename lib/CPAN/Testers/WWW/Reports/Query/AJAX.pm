@@ -3,7 +3,7 @@ package CPAN::Testers::WWW::Reports::Query::AJAX;
 use strict;
 use warnings;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
  
 #----------------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ CPAN::Testers::WWW::Reports::Query::AJAX - Get specific CPAN Testers results
 =head1 SYNOPSIS
  
     my $query = CPAN::Testers::WWW::Reports::Query::AJAX->new(
-        distribution    => 'App-Maisha',
+        dist            => 'App-Maisha',
         version         => '0.12',  # optional, will default to latest version
     );
 
@@ -44,7 +44,7 @@ CPAN::Testers::WWW::Reports::Query::AJAX - Get specific CPAN Testers results
 
     # basic filters (see new() for details)
     my $query = CPAN::Testers::WWW::Reports::Query::AJAX->new(
-        distribution    => 'App-Maisha',
+        dist            => 'App-Maisha',
         version         => '0.12',
         osname          => 'Win32',
         patches         => 1,
@@ -147,14 +147,14 @@ sub pc_unknown  { $_[0]->_basic_pc('unknown'); }
 sub _basic {
     my $self    = shift;
     my $grade   = shift;
-    my $version = $self->{result} || $self->{recent};
+    my $version = $self->{options}{version} || $self->{recent};
     return $self->{result}{$version}{$grade};
 }
 
 sub _basic_pc {
     my $self    = shift;
     my $grade   = shift;
-    my $version = $self->{result} || $self->{recent};
+    my $version = $self->{options}{version} || $self->{recent};
     return 0    unless($self->{result}{$version}{'all'});
     return $self->{result}{$version}{$grade} / $self->{result}{$version}{'all'} * 100;
 }
@@ -169,11 +169,14 @@ sub _parse {
             next if($line =~ /^\s*$/);
             my ($version,$all,$pass,$fail,$na,$unknown) = split(',',$line);
             next unless($version);
+            if (!exists $self->{recent}) {
+                $self->{recent} = $version;
+            }
             $self->{result}{$version}{pass}    = $pass;
             $self->{result}{$version}{fail}    = $fail;
             $self->{result}{$version}{na}      = $na;
             $self->{result}{$version}{unknown} = $unknown;
-            $self->{result}{$version}{unknown} = $all;
+            $self->{result}{$version}{all}     = $all;
         }
 
     } elsif($self->{options}{format} eq 'xml') {
@@ -182,11 +185,14 @@ sub _parse {
             next if($line =~ /^\s*$/);
             my ($all,$pass,$fail,$na,$unknown,$version) = $line =~ m{<version all="([^"]+)" pass="([^"]+)" fail="([^"]+)" na="([^"]+)" unknown="([^"]+)">([^<]+)</version>};
             next unless($version);
+            if (!exists $self->{recent}) {
+                $self->{recent} = $version;
+            }
             $self->{result}{$version}{pass}    = $pass;
             $self->{result}{$version}{fail}    = $fail;
             $self->{result}{$version}{na}      = $na;
             $self->{result}{$version}{unknown} = $unknown;
-            $self->{result}{$version}{unknown} = $all;
+            $self->{result}{$version}{all}     = $all;
         }
 
     } elsif($self->{options}{format} eq 'html') {
@@ -309,7 +315,7 @@ There are no known bugs at the time of this release. However, if you spot a
 bug or are experiencing difficulties, that is not explained within the POD
 documentation, please send bug reports and patches to the RT Queue (see below).
 
-Fixes are dependant upon their severity and my availablity. Should a fix not
+Fixes are dependent upon their severity and my availability. Should a fix not
 be forthcoming, please feel free to (politely) remind me.
 
 RT Queue -
