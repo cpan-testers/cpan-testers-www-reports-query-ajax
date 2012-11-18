@@ -1,155 +1,51 @@
-User Contributed Documentation     CPAN::Testers::WWW::Reports::Query::AJAX(3)
+CPAN-Testers-WWW-Reports-Query-AJAX
+===================================
 
+This distribution retrieves distribution stats direct from CPAN Testers website.
 
-NAME
-       CPAN::Testers::WWW::Reports::Query::AJAX - Get specific CPAN Testers
-       results
+DEPENDENCIES
 
-SYNOPSIS
-           my $query = CPAN::Testers::WWW::Reports::Query::AJAX->new(
-               distribution    => 'App-Maisha',
-               version         => '0.12',  # optional, will default to latest version
-           );
+The distribution requires the following modules:
 
-           # basic results
-           printf  "ALL: %d\n" .
-                   "PASS: %d\n" .
-                   "FAIL: %d\n" .
-                   "NA: %d\n" .
-                   "UNKNOWN: %d\n" .
-                   "%age PASS: %d\n" .
-                   "%age FAIL: %d\n" .
-                   "%age NA: %d\n" .
-                   "%age UNKNOWN: %d\n",
+  WWW::Mechanize
 
-                   $query->all,
-                   $query->pass,
-                   $query->fail,
-                   $query->na,
-                   $query->unknown,
-                   $query->pc_pass,
-                   $query->pc_fail,
-                   $query->pc_na,
-                   $query->pc_unknown;
+INSTALLATION
 
-           # get the raw data for all results, or a specific version if supplied
-           my $data = $query->raw;
+To install this module, untar the tarball into the directory of choice then
+type the following on the command line (substitute make with nmake or dmake
+if appropriate):
 
-           # basic filters (see new() for details)
-           my $query = CPAN::Testers::WWW::Reports::Query::AJAX->new(
-               distribution    => 'App-Maisha',
-               version         => '0.12',
-               osname          => 'Win32',
-               patches         => 1,
-               perlmat         => 1,
-               perlver         => '5.10.0',
-               format          => 'xml' # xml is default, text also supported
-           );
+  perl Makefile.PL
+  make
+  make test
+  make install
 
-           printf  "Win32 PASS: %d\n", $query->pass;
-
-DESCRIPTION
-       This module queries the CPAN Testers website (via the AJAX interface)
-       and retrieves a simple data set of results. It then parses these to
-       answer a few simple questions.
-
-INTERFACE
-   The Constructor
-       ·   new
-
-           Instatiates the object CPAN::WWW::Testers. Requires a hash of
-           parameters, with 'config' being the only mandatory key. Note that
-           'config' can be anything that Config::IniFiles accepts for the
-           -file option.
-
-   Counter Methods
-       ·   all
-
-           For the given query, the total number of reports stored.
-
-       ·   pass
-
-           For the given query, the total number of PASS reports stored.
-
-       ·   fail
-
-           For the given query, the total number of FAIL reports stored.
-
-       ·   na
-
-           For the given query, the total number of NA reports stored.
-
-       ·   unknown
-
-           For the given query, the total number of UNKNOWN reports stored.
-
-       ·   pc_pass
-
-           For the given query, the percentage number of PASS reports stored
-           against all reports stored.
-
-       ·   pc_fail
-
-           For the given query, the percentage number of FAIL reports stored
-           against all reports stored.
-
-       ·   pc_na
-
-           For the given query, the percentage number of NA reports stored
-           against all reports stored.
-
-       ·   pc_unknown
-
-           For the given query, the percentage number of UNKNOWN reports
-           stored against all reports stored.
-
-   Data Methods
-       ·   data
-
-           Returns the basic data structure as a hash reference. If a version
-           is passed as a parameter, the data only for that version is
-           returned. Otherwise all the results are returned, with the version
-           as the top level key of the hash.
-
-       ·   raw
-
-           Returns the raw content returned from the server.
+Alternatively you may wish to use the CPAN.pm shell or CPANPLUS shell as your
+installer, which will automatically detect uninstalled prerequisities and 
+install those too for you.
 
 BUGS, PATCHES & FIXES
-       There are no known bugs at the time of this release. However, if you
-       spot a bug or are experiencing difficulties, that is not explained
-       within the POD documentation, please send bug reports and patches to
-       the RT Queue (see below).
 
-       Fixes are dependent upon their severity and my availability. Should a
-       fix not be forthcoming, please feel free to (politely) remind me.
+There are no known bugs at the time of this release. However, if you spot a
+bug or are experiencing difficulties that are not explained within the POD
+documentation, please submit a bug to the RT system (see link below). However,
+it would help greatly if you are able to pinpoint problems or even supply a 
+patch. 
 
-       RT Queue -
-       http://rt.cpan.org/Public/Dist/Display.html?Name=CPAN::Testers::WWW::Reports::Query::AJAX
+Fixes are dependent upon their severity and my availability. Should a fix not
+be forthcoming, please feel free to (politely) remind me by sending an email
+to barbie@cpan.org .
 
-SEE ALSO
-       CPAN::Testers::Data::Generator, CPAN::Testers::WWW::Reports
-
-       http://www.cpantesters.org/, http://stats.cpantesters.org/,
-       http://wiki.cpantesters.org/
-
-       I would also like to thank Leo Lapworth from prompting me to write
-       this, sorry its taken so long to release. However, you may be
-       interested in his alternative query distribution
-       CPAN::Testers::Reports::Query::JSON.
-
-       Initially released during the 2012 QA Hackathon in Paris.
+RT: http://rt.cpan.org/Public/Dist/Display.html?Name=CPAN-Testers-WWW-Reports-Query-AJAX
 
 AUTHOR
-         Barbie, <barbie@cpan.org>
-         for Miss Barbell Productions <http://www.missbarbell.co.uk>.
+
+Barbie <barbie@cpan.org>
+for Miss Barbell Productions http://www.missbarbell.co.uk.
 
 COPYRIGHT AND LICENSE
-         Copyright (C) 2011-2012 Barbie for Miss Barbell Productions.
 
-         This module is free software; you can redistribute it and/or
-         modify it under the same terms as Perl itself.
+  Copyright (C) 2011-2012 Barbie for Miss Barbell Productions
 
-
-
-perl v5.10.1                      2CPAN::Testers::WWW::Reports::Query::AJAX(3)
+  This module is free software; you can redistribute it and/or
+  modify it under the Artistic Licence v2.
