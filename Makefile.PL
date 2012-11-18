@@ -18,8 +18,8 @@ WriteMakefile(
         'WWW::Mechanize'    => 0,
 
         # build/test prereqs
-        'Test::More'        => '0.70',
-        'IO::File'          => '0'
+        'IO::File'          => '0',
+        'Test::More'        => '0.70'
 
     }
 );
