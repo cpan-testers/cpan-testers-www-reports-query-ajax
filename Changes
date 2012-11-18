@@ -1,6 +1,8 @@
 Revision history for CPAN-Testers-WWW-Reports-Query-AJAX
 
         - change file dates changed to meet W3CDTF standards.
+        - updated README.
+        - updated tests.
 
 0.05    2012-04-29
         - various code fixes (patched by Manoj Kumar)
@@ -20,4 +22,3 @@ Revision history for CPAN-Testers-WWW-Reports-Query-AJAX
 
 0.01    2012-03-30
         - First release
-

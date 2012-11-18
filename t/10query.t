@@ -61,7 +61,7 @@ SKIP: {
             my $version = $args->{version} || '0.15';
 
             if($args->{format} && $args->{format} eq 'html') {
-                like($raw,qr{<td><a href="javascript:selectReports\('App-Maisha-$version'\);">$version</a></td>},'.. got version statement in raw');
+                like($raw,qr{<td><a href=\\"javascript:selectReports\('App-Maisha-$version'\);\\">$version</a></td>},'.. got version statement in raw');
                 ok(1,".. we don't parse html format");
             } elsif($args->{format} && $args->{format} eq 'txt') {
                 like($raw,qr{$version,\d+},'.. got version statement in raw');
