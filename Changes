@@ -1,21 +1,23 @@
 Revision history for CPAN-Testers-WWW-Reports-Query-AJAX
 
-0.05	29/04/2012
-	- various code fixes (patched by Manoj Kumar)
-	- spelling fixes. (thanks to Florian Schlichting & Gregor Herrmann).
+        - change file dates changed to meet W3CDTF standards.
 
-0.04	18/04/2012
-	- added minimum perl version (5.006).
-	- reworked Makefile.PL for clarity.
-	- fixed license in META.yml.
+0.05    2012-04-29
+        - various code fixes (patched by Manoj Kumar)
+        - spelling fixes. (thanks to Florian Schlichting & Gregor Herrmann).
 
-0.03    09/04/2012
-	- added better error handling.
+0.04    2012-04-18
+        - added minimum perl version (5.006).
+        - reworked Makefile.PL for clarity.
+        - fixed license in META.yml.
 
-0.02    06/04/2012
-	- added META.json and test script.
-	- added ping test & skip if no network.
+0.03    2012-04-09
+        - added better error handling.
 
-0.01    30/03/2012
+0.02    2012-04-06
+        - added META.json and test script.
+        - added ping test & skip if no network.
+
+0.01    2012-03-30
         - First release
 
