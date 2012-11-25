@@ -1,5 +1,8 @@
 Revision history for CPAN-Testers-WWW-Reports-Query-AJAX
 
+0.07    2012-11-25
+        - use Test::MockObject instead of an internet connection.
+
 0.06    2012-11-18
         - change file dates changed to meet W3CDTF standards.
         - updated README.
