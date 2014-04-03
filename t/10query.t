@@ -24,10 +24,10 @@ my @args = (
             fail        => 2,
             na          => 0,
             unknown     => 1,
-            pc_pass     => 98.7654320987654,
-            pc_fail     => 0.823045267489712,
+            pc_pass     => 98.7654320988,
+            pc_fail     => 0.8230452675,
             pc_na       => 0,
-            pc_unknown  => 0.411522633744856
+            pc_unknown  => 0.4115226337
         }
     },
     {   args => { 
@@ -42,10 +42,10 @@ my @args = (
             fail        => 2,
             na          => 0,
             unknown     => 1,
-            pc_pass     => 98.7654320987654,
-            pc_fail     => 0.823045267489712,
+            pc_pass     => 98.7654320988,
+            pc_fail     => 0.8230452675,
             pc_na       => 0,
-            pc_unknown  => 0.411522633744856
+            pc_unknown  => 0.4115226337
         }
     },
     {   args => { 
@@ -67,10 +67,10 @@ my @args = (
             fail        => 2,
             na          => 0,
             unknown     => 1,
-            pc_pass     => 98.7654320987654,
-            pc_fail     => 0.823045267489712,
+            pc_pass     => 98.7654320988,
+            pc_fail     => 0.8230452675,
             pc_na       => 0,
-            pc_unknown  => 0.411522633744856
+            pc_unknown  => 0.4115226337
         }
     },
     {   args => { 

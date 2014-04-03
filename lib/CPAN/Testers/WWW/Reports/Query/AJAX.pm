@@ -156,7 +156,9 @@ sub _basic_pc {
     my $grade   = shift;
     my $version = $self->{options}{version} || $self->{recent};
     return 0    unless($self->{result}{$version}{'all'});
-    return $self->{result}{$version}{$grade} / $self->{result}{$version}{'all'} * 100;
+    my $pc = sprintf "%3.10f", $self->{result}{$version}{$grade} / $self->{result}{$version}{'all'} * 100;
+    $pc =~ s/\.?0+$//;
+    return $pc;
 }
 
 sub _parse {
