@@ -2,6 +2,8 @@ Revision history for CPAN-Testers-WWW-Reports-Query-AJAX
 ========================================================
 
         - refine percentage calculation to 10 decimal places.
+        - added live test to be used under RELEASE_TESTING.
+        - added LICENSE file.
 
 0.07    2012-11-25
         - use Test::MockObject instead of an internet connection.
