@@ -1,5 +1,5 @@
 --- #YAML:1.0
-name:                CPAN::Testers::WWW::Reports::Query::AJAX
+name:                CPAN-Testers-WWW-Reports-Query-AJAX
 version:             0.08
 abstract:            Retrieve distribution stats direct from CPAN Testers website.
 author:
@@ -28,6 +28,8 @@ provides:
     version:  0.08
 
 resources:
+  license:    http://www.perlfoundation.org/artistic_license_2_0
+  bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=CPAN-Testers-WWW-Reports-Query-AJAX
   repository: http://github.com/barbie/cpan-testers-www-reports-query-ajax
 
 meta-spec:
