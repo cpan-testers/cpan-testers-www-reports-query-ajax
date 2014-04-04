@@ -1,6 +1,6 @@
 {
     "name": "CPAN-Testers-WWW-Reports-Query-AJAX",
-    "version": "0.07",
+    "version": "0.08",
     "abstract": "Retrieve distribution stats direct from CPAN Testers website.",
     "author": [
         "Barbie (BARBIE) <barbie@cpan.org>"
@@ -46,7 +46,7 @@
     "provides": {
         "CPAN::Testers::WWW::Reports::Query::AJAX": {
             "file": "lib/CPAN/Testers/WWW/Reports/Query/AJAX.pm",
-            "version": "0.07"
+            "version": "0.08"
         }
     },
     "no_index": {

@@ -1,6 +1,7 @@
 Revision history for CPAN-Testers-WWW-Reports-Query-AJAX
 ========================================================
 
+0.08    2014-04-04
         - refine percentage calculation to 10 decimal places.
         - added live test to be used under RELEASE_TESTING.
         - added LICENSE file.
