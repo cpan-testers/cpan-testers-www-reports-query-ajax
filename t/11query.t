@@ -2,9 +2,13 @@
 use strict;
 
 use lib qw(./lib);
-use Test::More tests => 94;
-
 use CPAN::Testers::WWW::Reports::Query::AJAX;
+use Test::More;
+
+plan skip_all => "Release tests not required for installation"
+    unless ( $ENV{RELEASE_TESTING} );
+
+plan tests => 94;
 
 # various argument sets for examples
 
