@@ -4,6 +4,7 @@ Revision history for CPAN-Testers-WWW-Reports-Query-AJAX
         - fixed license fields in META.json to be lists.
         - added homepage to META resources.
         - added documentation about the CPAN Testers Fund.
+        - extended META testing.
 
 0.08    2014-04-04
         - refine percentage calculation to 10 decimal places.
