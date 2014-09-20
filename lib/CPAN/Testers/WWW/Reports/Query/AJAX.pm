@@ -81,7 +81,7 @@ my %rules = (
     patches => qr/^([0-2])$/i,
     perlver => qr/^([\w.]+)$/i,
     osname  => qr/^([\w.]+)$/i,
-    format  => qr/^(text|html|xml)$/i
+    format  => qr/^(txt|html|xml)$/i
 );
 
 my @fields = keys %rules;
@@ -100,13 +100,18 @@ sub new {
     };
     bless $self, $class;
     my @valid = qw(format);
-    
+
+    unless($hash{dist}) {
+        $self->{error} = q{no value for 'dist' provided};
+        return;
+    }
+
     for my $key (@fields) {
         next    unless($hash{$key});
-        $hash{$key} =~ s/$rules{$key}/$1/;
-        next    unless($hash{$key});
+        my ($value) = $hash{$key} =~ m/$rules{$key}/;
+        next    unless($value);
 
-        $self->{options}{$key} = $hash{$key};
+        $self->{options}{$key} = $value;
         push @valid, $key;
     }
 
