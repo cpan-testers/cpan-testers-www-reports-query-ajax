@@ -2,7 +2,7 @@
 use strict;
 
 use lib qw(./lib);
-use Test::More tests => 94;
+use Test::More tests => 118;
 
 use CPAN::Testers::WWW::Reports::Query::AJAX;
 
@@ -15,7 +15,7 @@ my @args = (
     {   args => { 
             dist    => 'App-Maisha',
             version => '0.15',  # optional, will default to latest version
-            format  => 'txt'
+            format  => 'csv'
         },
         raw => q{0.15,243,240,2,0,1},
         results => {
@@ -75,7 +75,7 @@ my @args = (
     },
     {   args => { 
             dist    => 'App-Maisha',
-            format  => 'txt'
+            format  => 'csv'
         },
         raw => q{0.18,139,139,0,0,0
 0.17,123,123,0,0,0
@@ -182,6 +182,41 @@ my @args = (
             pc_na       => 0,
             pc_unknown  => 0
         }
+    },
+    {   args => { 
+            dist    => 'App-Maisha',
+            format  => 'blah'
+        },
+        raw => q{<versions>
+<version all="139" pass="139" fail="0" na="0" unknown="0">0.18</version>
+<version all="123" pass="123" fail="0" na="0" unknown="0">0.17</version>
+<version all="113" pass="113" fail="0" na="0" unknown="0">0.16</version>
+<version all="243" pass="240" fail="2" na="0" unknown="1">0.15</version>
+<version all="56" pass="56" fail="0" na="0" unknown="0">0.14</version>
+<version all="96" pass="96" fail="0" na="0" unknown="0">0.13</version>
+<version all="106" pass="103" fail="3" na="0" unknown="0">0.12</version>
+<version all="38" pass="38" fail="0" na="0" unknown="0">0.11</version>
+<version all="36" pass="36" fail="0" na="0" unknown="0">0.10</version>
+<version all="23" pass="23" fail="0" na="0" unknown="0">0.09</version>
+<version all="26" pass="26" fail="0" na="0" unknown="0">0.08</version>
+<version all="23" pass="23" fail="0" na="0" unknown="0">0.07</version>
+<version all="35" pass="15" fail="20" na="0" unknown="0">0.06</version>
+<version all="29" pass="4" fail="25" na="0" unknown="0">0.05</version>
+<version all="39" pass="11" fail="28" na="0" unknown="0">0.04</version>
+<version all="32" pass="6" fail="26" na="0" unknown="0">0.03</version>
+<version all="33" pass="4" fail="29" na="0" unknown="0">0.02</version>
+<version all="39" pass="3" fail="36" na="0" unknown="0">0.01</version> </versions>},
+        results => {
+            all         => 139,
+            pass        => 139,
+            fail        => 0,
+            na          => 0,
+            unknown     => 0,
+            pc_pass     => 100,
+            pc_fail     => 0,
+            pc_na       => 0,
+            pc_unknown  => 0
+        }
     }
 );
 
@@ -211,14 +246,17 @@ BEGIN {
 # Test Main
 
 SKIP: {
-    skip "Test::MockObject required for testing", 94 if $nomock;
+    skip "Test::MockObject required for testing", 118 if $nomock;
+
+    my $query = CPAN::Testers::WWW::Reports::Query::AJAX->new();
+    is($query,undef,"no args, no object" );
 
     for my $args (@args) {
 
         $RAW = $args->{raw};
 
         my $query = CPAN::Testers::WWW::Reports::Query::AJAX->new( %{$args->{args}} );
-        ok($query,'.. got response');
+        ok($query,"got response: $args->{args}{dist}" . ($args->{args}{version} ? "-$args->{args}{version}" : '') );
 
         my $raw  = $query->raw();
         my $data = $query->data();
@@ -246,12 +284,15 @@ SKIP: {
             my $version = $args->{args}{version} || '0.15';
 
             if($args->{args}{format} && $args->{args}{format} eq 'html') {
+                is($query->{options}{format},$args->{args}{format},'.. format the same: html');
                 like($raw,qr{<td><a href=(\\)?"javascript:selectReports\('App-Maisha-$version'\);(\\)?">$version</a></td>},'.. got version statement in raw');
                 ok(1,".. we don't parse html format");
-            } elsif($args->{args}{format} && $args->{args}{format} eq 'txt') {
+            } elsif($args->{args}{format} && $args->{args}{format} eq 'csv') {
+                is($query->{options}{format},$args->{args}{format},'.. format the same: csv');
                 like($raw,qr{$version,\d+},'.. got version statement in raw');
                 ok($data->{$version},'.. got version in hash');
             } else { # xml
+                is($query->{options}{format},'xml','.. default format: xml');
                 like($raw,qr{<version all=(\\"\d+\\"|"\d+").*?>$version</version>},'.. got version statement in raw');
                 ok($data->{$version},'.. got version in hash');
             }

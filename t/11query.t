@@ -8,7 +8,7 @@ use Test::More;
 plan skip_all => "Release tests not required for installation"
     unless ( $ENV{RELEASE_TESTING} );
 
-plan tests => 94;
+plan tests => 102;
 
 # various argument sets for examples
 
@@ -16,7 +16,7 @@ my @args = (
     {   args => { 
             dist    => 'App-Maisha',
             version => '0.15',  # optional, will default to latest version
-            format  => 'txt'
+            format  => 'csv'
         },
         results => {
             all         => 243,
@@ -72,7 +72,7 @@ my @args = (
     },
     {   args => { 
             dist    => 'CPAN-WWW-Testers',
-            format  => 'txt'
+            format  => 'csv'
         },
         results => {
             all         => 214,
@@ -126,12 +126,12 @@ my @args = (
 );
 
 SKIP: {
-    skip "Network unavailable", 94 if(pingtest());
+    skip "Network unavailable", 102 if(pingtest());
 
     for my $args (@args) {
 
         my $query = CPAN::Testers::WWW::Reports::Query::AJAX->new( %{$args->{args}} );
-        ok($query,'.. got response');
+        ok($query,"got response: $args->{args}{dist}" . ($args->{args}{version} ? "-$args->{args}{version}" : '') );
 
         my $raw  = $query->raw();
         my $data = $query->data();
@@ -160,12 +160,15 @@ SKIP: {
             my $distro  = $args->{args}{dist} || '';
 
             if($args->{args}{format} && $args->{args}{format} eq 'html') {
+                is($query->{options}{format},$args->{args}{format},'.. format the same: html');
                 like($raw,qr{<td><a href=(\\)?"javascript:selectReports\('$distro-$version'\);(\\)?">$version</a></td>},'.. got version statement in raw');
                 ok(1,".. we don't parse html format");
-            } elsif($args->{args}{format} && $args->{args}{format} eq 'txt') {
+            } elsif($args->{args}{format} && $args->{args}{format} eq 'csv') {
+                is($query->{options}{format},$args->{args}{format},'.. format the same: csv');
                 like($raw,qr{$version,\d+},'.. got version statement in raw');
                 ok($data->{$version},'.. got version in hash');
             } else { # xml
+                is($query->{options}{format},'xml','.. default format: xml');
                 like($raw,qr{<version all=(\\"\d+\\"|"\d+").*?>$version</version>},'.. got version statement in raw');
                 ok($data->{$version},'.. got version in hash');
             }
