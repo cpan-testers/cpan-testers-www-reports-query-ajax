@@ -120,7 +120,7 @@ sub new {
     # ajax request 
     my $url = $URL;
     $url .= join( '&', map { "$_=$self->{options}{$_}" } @valid ); 
-    #print "URL: $url\n";
+    #print STDERR "# URL: $url\n";
 	eval { $mech->get( $url ); };
     if($@ || !$mech->success()) {
         $self->{error} = $@;
@@ -202,7 +202,8 @@ sub _parse {
             $self->{result}{$version}{all}     = $all;
         }
 
-    } elsif($self->{options}{format} eq 'html') {
+    #} elsif($self->{options}{format} eq 'html') {
+    } else {
         # TODO: need to pull out OT response
     }
 
