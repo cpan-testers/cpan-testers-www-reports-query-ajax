@@ -6,6 +6,7 @@ Revision history for CPAN-Testers-WWW-Reports-Query-AJAX
         - added documentation about the CPAN Testers Fund.
         - extended META testing.
         - fixed option validation.
+        - more documentation.
 
 0.08    2014-04-04
         - refine percentage calculation to 10 decimal places.
