@@ -81,7 +81,7 @@ my %rules = (
     patches => qr/^([0-2])$/i,
     perlver => qr/^([\w.]+)$/i,
     osname  => qr/^([\w.]+)$/i,
-    format  => qr/^(txt|html|xml)$/i
+    format  => qr/^(csv|html|xml)$/i
 );
 
 my @fields = keys %rules;
@@ -170,7 +170,7 @@ sub _parse {
     my ($self,$content) = @_;
     $self->{content} = $content;
 
-    if($self->{options}{format} eq 'txt') {
+    if($self->{options}{format} eq 'csv') {
         my @lines = split("\n",$content);
         for my $line (@lines) {
             next if($line =~ /^\s*$/);
@@ -290,8 +290,7 @@ Systems.
 
 item * format (optional)
 
-Available formats are: 'csv', 'txt', 'html' and 'xml'. Defaults to 'html'.
-'txt' is provided for backwards compatibility, but is mapped to 'csv'.
+Available formats are: 'csv', 'html' and 'xml'. Defaults to 'html'.
 
 =back
 

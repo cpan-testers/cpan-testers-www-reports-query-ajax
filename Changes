@@ -7,6 +7,7 @@ Revision history for CPAN-Testers-WWW-Reports-Query-AJAX
         - extended META testing.
         - fixed option validation.
         - more documentation.
+        - switched 'txt' to 'csv'.
 
 0.08    2014-04-04
         - refine percentage calculation to 10 decimal places.
